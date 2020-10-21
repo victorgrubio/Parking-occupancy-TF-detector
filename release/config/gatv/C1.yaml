@@ -1,0 +1,27 @@
+parking:
+    zone: gatv
+    id: C1
+
+video:
+    video_path: 'http://root:w3p4rk@192.168.0.151/mjpg/video.mjpg'
+    cam: 1
+    fps_rate: 10
+    mean_images: 10
+    threshold: 0.1
+    queue_size: 10
+
+files:
+    points: 'points/gatv/zones_C1.csv'
+    model_arch:  'models/10_10-18_00/model_architecture.json'
+    model_weights: 'models/10_10-18_00/model_weights.h5py'
+    img_dirpath: 'images/'
+    web_img_dirpath: 'web_images/'
+    img_save_ratio: 60
+
+ssh:
+    server_domain: www.gatv.ssr.upm.es
+    ssh_key: Tuv16p1rK
+    ssh_server: 'wepark@www.gatv.ssr.upm.es:html/images/'
+
+api:
+    api_server: 'https://wegoandpark.squada.com/api/v1/'

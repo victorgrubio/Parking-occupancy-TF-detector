@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="logos/wepark.ico" type="image/ico" />
+		<title>WeGo&Park</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="author" content="Víctor Nuñez">
+		<link href="css/main.css" rel="stylesheet">
+		<link href="css/demo.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="header">
+			<div class="logo">
+				<a href="index.html">
+					<!-- <img src="logos/wegopark.png" alt="Logo" class="logo-img" width="400px"> -->
+				</a>
+<!--		<h1>Demostrador WeGo&Park</h1>
+-->			</div>
+			<ul class="demo-nav">
+				<li class="demo-nav-link">
+					<!-- <img id="logo1" src="logos/wellness.png" style="width:150px; "> -->
+					<img id="logo2" src="logos/visiona.png" style="width:155px; margin-left:45px;">
+					<a href=""></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="wrapper">
+			<div class="main">
+
+				<!-- Nav -->
+				<nav class="nav">
+					<ul class="nav-list">
+						<li class="nav-item"><a href="index.html">Real Time</a></li>
+						<li class="nav-item"><a href="hoy.html">Today</a></li>
+						<li class="nav-item"><a href="historico.html">Historical</a></li>
+					</ul>
+				</nav>
+				<!-- /Nav -->
+
+				<div class="content">
+					<div class="form">
+
+						Camera: <select id="switch-cam" onclick="actualizar()">
+				      <option value="cam01">01</option>
+				      <option value="cam02">02</option>
+				    </select>
+						| Day:  <input type="date" id="theDate" min="2016-05-20" max="theDate" onchange="actualizar()">
+
+					</div>
+
+			    <div id="visual" class="visual">
+			      <div id="gallery" class="gallery">
+			        <video id="video" controls autoplay style="width:640px; height:480px;">Reproductor día completo</video>
+
+     				</div>
+			    </div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var date = new Date();
+			date.setDate(date.getDate() - 1);
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
+
+			if (month < 10) month = "0" + month;
+			if (day < 10) day = "0" + day;
+
+			var today = year + "-" + month + "-" + day;
+			document.getElementById("theDate").value = today;
+
+
+
+		(function () {
+
+		    // Create mobile element
+		    var mobile = document.createElement('div');
+		    mobile.className = 'nav-mobile';
+		    document.querySelector('.nav').appendChild(mobile);
+
+		    // hasClass
+		    function hasClass(elem, className) {
+		        return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+		    }
+
+		    // toggleClass
+		    function toggleClass(elem, className) {
+		        var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+		        if (hasClass(elem, className)) {
+		            while (newClass.indexOf(' ' + className + ' ') >= 0) {
+		                newClass = newClass.replace(' ' + className + ' ', ' ');
+		            }
+		            elem.className = newClass.replace(/^\s+|\s+$/g, '');
+		        } else {
+		            elem.className += ' ' + className;
+		        }
+		    }
+
+		    // Mobile nav function
+		    var mobileNav = document.querySelector('.nav-mobile');
+		    var toggle = document.querySelector('.nav-list');
+		    mobileNav.onclick = function () {
+		        toggleClass(this, 'nav-mobile-open');
+		        toggleClass(toggle, 'nav-active');
+		    };
+		})();
+		</script>
+
+		<!-- Demo Analytics -->
+<!--		<script>
+			var _gaq=[['_setAccount','UA-20440416-10'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src='//www.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)})(document,'script');
+		</script>
+-->
+		<!-- Demo Ads -->
+		<script type="text/javascript">
+		function actualizar(){
+			var y = document.getElementById("switch-cam").value;
+			camara = y.toString();
+			var y = document.getElementById("theDate").value;
+			fecha = y.toString();
+			dia = fecha.substring(8, 10);
+			mes = fecha.substring(5, 7);
+			año = fecha.substring(0, 4);
+			fecha1 = año.concat(mes, dia);
+			document.getElementById("video").src = "videos/"+camara+"/"+fecha1+".mp4";
+
+		}
+
+		window.onload=actualizar;
+		</script>
+	</body>
+</html>

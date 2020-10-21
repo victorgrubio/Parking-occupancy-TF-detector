@@ -1,0 +1,45 @@
+#venv
+venv
+
+#Eclipse files
+.project
+.pydevproject
+
+#Images
+**/*.png
+**/*.jpg
+*.jpg,*.png
+
+#Build files
+__pycache__
+build
+*.pyc
+
+#models
+models
+
+*.xml
+
+#IDE folders
+.vscode
+.spyproject
+
+# Tar & olds
+old_models
+parking_tars
+*.tar.xz
+
+#Video
+**/*.mp4
+**/*.avi
+**/*.ts
+**/*.ffm
+
+#Test
+test_images
+test_points
+web_images
+
+#Logs
+log/*.log
+log/*.log*

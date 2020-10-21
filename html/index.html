@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="logos/wepark.ico" type="image/ico" />
+		<title>WeGo&Park</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="author" content="Victor Nuñez">
+		<link href="css/main.css" rel="stylesheet">
+		<link href="css/demo.css" rel="stylesheet">
+	</head>
+	<body onload="inicio()">
+
+		<div class="header">
+			<!-- <div class="logo">
+				<a href="index.html">
+					<img src="logos/wegopark.png" alt="Logo" class="logo-img" width="400px">
+				</a>
+		</div> -->
+			<ul class="demo-nav">
+				<li class="demo-nav-link">
+					<!--<img id="logo1" src="logos/wellness.png" style="width:150px; ">-->
+					<img id="logo2" src="logos/visiona.png" style="width:155px; margin-left:45px;">
+					<a href=""></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="wrapper">
+			<div class="main">
+
+				<!-- Nav -->
+				<nav class="nav">
+					<ul class="nav-list">
+						<li class="nav-item"><a href="index.html">Real Time</a></li>
+						<li class="nav-item"><a href="hoy.html">Today</a></li>
+						<li class="nav-item"><a href="historico.html">Historical</a></li>
+					</ul>
+				</nav>
+				<!-- /Nav -->
+
+				<div class="content">
+					<div class="form">
+						<div class="select">
+							Camera: <select id="switch-cam" onclick="actualizar()">
+			      		<option value="cam01">01</option>
+			      		<option value="cam02">02</option>
+			    		</select>
+						</div>
+					</div>
+			    <div id="visual" class="visual">
+			      <div id="gallery" class="gallery">
+							<img id="img" class="img" src="images/parking1.jpg"/>
+      			</div>
+			    </div>
+				</div>
+			</div>
+		</div>
+		<script>
+		(function () {
+
+		    // Create mobile element
+		    var mobile = document.createElement('div');
+		    mobile.className = 'nav-mobile';
+		    document.querySelector('.nav').appendChild(mobile);
+
+		    // hasClass
+		    function hasClass(elem, className) {
+		        return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+		    }
+
+		    // toggleClass
+		    function toggleClass(elem, className) {
+		        var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+		        if (hasClass(elem, className)) {
+		            while (newClass.indexOf(' ' + className + ' ') >= 0) {
+		                newClass = newClass.replace(' ' + className + ' ', ' ');
+		            }
+		            elem.className = newClass.replace(/^\s+|\s+$/g, '');
+		        } else {
+		            elem.className += ' ' + className;
+		        }
+		    }
+
+		    // Mobile nav function
+		    var mobileNav = document.querySelector('.nav-mobile');
+		    var toggle = document.querySelector('.nav-list');
+		    mobileNav.onclick = function () {
+		        toggleClass(this, 'nav-mobile-open');
+		        toggleClass(toggle, 'nav-active');
+		    };
+		})();
+		</script>
+
+		<script type="text/javascript">
+		function actualizar(){
+			var y = document.getElementById("switch-cam").value;
+			camara = y.toString();
+
+			if (camara == "cam01")
+			{
+				document.getElementById("img").src = "images/parking1.jpg?time=" + new Date();
+			}else {
+				document.getElementById("img").src = "images/parking2.jpg?time=" + new Date();;
+
+			}
+		}
+
+		function inicio() {
+
+			setInterval(actualizar, 3000);
+
+		}
+
+		</script>
+	</body>
+</html>

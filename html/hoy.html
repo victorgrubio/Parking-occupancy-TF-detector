@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="logos/wepark.ico" type="image/ico" />
+		<title>WeGo&Park</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta name="author" content="Victor Nuñez">
+		<link href="css/main.css" rel="stylesheet">
+		<link href="css/demo.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="header">
+			<div class="logo">
+				<a href="index.html">
+					<img src="logos/wegopark.png" alt="Logo" class="logo-img" width="400px">
+				</a>
+<!--		<h1>Demostrador WeGo&Park</h1>
+-->			</div>
+			<ul class="demo-nav">
+				<li class="demo-nav-link">
+					<img id="logo1" src="logos/wellness.png" style="width:150px; ">
+					<img id="logo2" src="logos/visiona.png" style="width:155px; margin-left:45px;">
+					<a href=""></a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="wrapper">
+			<div class="main">
+
+				<!-- Nav -->
+				<nav class="nav">
+					<ul class="nav-list">
+						<li class="nav-item"><a href="index.html">Real Time</a></li>
+						<li class="nav-item"><a href="hoy.html">Today</a></li>
+						<li class="nav-item"><a href="historico.html">Historical</a></li>
+					</ul>
+				</nav>
+				<!-- /Nav -->
+				<div class="content">
+					<div class="form">
+						Camera: <select id="switch-cam" onchange="cambio('3')">
+			      	<option value="cam01">01</option>
+			      	<option value="cam02">02</option>
+			    	</select>
+						| Select:<input type="submit" id="anterior" value="previous" onclick="cambio('1')"></input>
+						<input type="submit" id="siguiente" value="next" onclick="cambio('2')"></input>
+
+					</div>
+
+					<div id="visual" class="visual">
+			      <div id="gallery" class="gallery">
+							<img id="img" src="images/cam01/1440.jpg" onerror="manejar(this)" />
+      			</div>
+			    </div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function cambio(opc){
+
+				var y = document.getElementById('img').src;
+				imagen = y.toString();
+
+				var y = document.getElementById("switch-cam").value;
+				camara = y.toString();
+				var numerofinal=imagen.split(/(\\|\/)/g).pop();
+				var numint = parseInt(numerofinal);
+
+
+				if (opc == '1'){
+					if (numint == 1) numint = 1440;
+					else numint = numint-1;
+				} else if (opc == '2') {
+					if (numint == 1440) numint = 1;
+					else numint = numint+1;
+				} else if (opc == '3') {
+					numint = 1440;
+				}
+				/*console.log(imagen);
+				console.log(numimg);
+				console.log(numimg1);
+				console.log(numimg2);
+				console.log(numimg3);
+				console.log(numerofinal);
+				console.log(numint);*/
+				document.getElementById("img").src = "images/"+camara+"/"+numint+".jpg";
+
+			}
+			function manejar(o,i){
+				var y = document.getElementById("switch-cam").value;
+				camara = y.toString();
+
+
+				if(typeof i=='undefined')i=1440; else i--;
+				/*console.log(i);*/
+				if(i){
+					if (i==1){
+						i=1440;
+					}
+					o.src= "images/"+camara+"/"+i+".jpg?time=" + new Date();
+					o.onerror=function(){manejar(o,i);}
+/*					document.getElementById('log').innerHTML+='intentando carga'+i+'<br />';
+*/				}else{
+					document.getElementById('log').innerHTML+='no hay caso';
+					o.parentNode.replaceChild(document.createTextNode('imagen inexistente'),o);
+				}
+
+			}
+		</script>
+		<script>
+		(function () {
+
+		    // Create mobile element
+		    var mobile = document.createElement('div');
+		    mobile.className = 'nav-mobile';
+		    document.querySelector('.nav').appendChild(mobile);
+
+		    // hasClass
+		    function hasClass(elem, className) {
+		        return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+		    }
+
+		    // toggleClass
+		    function toggleClass(elem, className) {
+		        var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, ' ') + ' ';
+		        if (hasClass(elem, className)) {
+		            while (newClass.indexOf(' ' + className + ' ') >= 0) {
+		                newClass = newClass.replace(' ' + className + ' ', ' ');
+		            }
+		            elem.className = newClass.replace(/^\s+|\s+$/g, '');
+		        } else {
+		            elem.className += ' ' + className;
+		        }
+		    }
+
+		    // Mobile nav function
+		    var mobileNav = document.querySelector('.nav-mobile');
+		    var toggle = document.querySelector('.nav-list');
+		    mobileNav.onclick = function () {
+		        toggleClass(this, 'nav-mobile-open');
+		        toggleClass(toggle, 'nav-active');
+		    };
+		})();
+		</script>
+
+	</body>
+</html>

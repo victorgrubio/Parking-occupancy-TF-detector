@@ -1,0 +1,13 @@
+#build version with volumes
+docker-compose up parking
+
+#in other terminal join to the runnning container
+docker exec -ti  docker_parking_1 bash
+
+#execute ssh to server
+ssh wepark@www.gatv.ssr.upm.es
+
+#run program
+python3 main.py -p C1 -v http://root:w3p4rk@192.168.0.151/mjpg/video.mjpg --save_results --xml
+
+
